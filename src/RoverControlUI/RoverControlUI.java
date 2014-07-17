@@ -52,5 +52,6 @@ public class RoverControlUI extends Application {
         stage.show();
     }
     
+    FXMLDocumentController controller;
     
 }

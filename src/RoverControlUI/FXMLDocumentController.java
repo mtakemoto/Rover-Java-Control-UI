@@ -24,19 +24,19 @@ import javafx.scene.layout.AnchorPane;
  */
 public class FXMLDocumentController implements Initializable {
     @FXML
-    private Tab graphTab;
+    public Tab graphTab;
     @FXML
-    private AnchorPane LRPMContainer;
+    public AnchorPane LRPMContainer;
     @FXML
-    private Label LRPMData;
+    public Label LRPMData;
     @FXML
-    private Label RRPMData;
+    public Label RRPMData;
     @FXML
-    private Label GPSLat;
+    public Label GPSLat;
     @FXML
-    private Label GPSLong;
+    public Label GPSLong;
     @FXML
-    private Tab webTab;
+    public Tab webTab;
     
 
     /**
@@ -44,25 +44,10 @@ public class FXMLDocumentController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         Task task = new Task<Void>() {
-            @Override public Void call() {
-                final int max = 1000000;
-                
-                while(true) {
-                    int i = 0;
-                    if (isCancelled()) {
-                       break;
-                    }
-                    i++;
-                    updateMessage(Integer.toString(i));
-                }
-                return null;
-                
-            }
-        };
+        ControlLoop task = new ControlLoop();
          
-        LRPMData.textProperty().bind(task.messageProperty());
-        RRPMData.setText("Right RPM");
+        LRPMData.textProperty().bind(task.LRPMValue);
+        RRPMData.textProperty().bind(task.RRPMValue);
         GPSLat.setText("GPS L");
         GPSLong.setText("GPS R");
         
@@ -71,12 +56,5 @@ public class FXMLDocumentController implements Initializable {
         t1.start();
     }
     
-    public Label getLabel() {
-        return LRPMData;
-    }
-    
-    public static void loop() {
-        
-    }
     
 }
