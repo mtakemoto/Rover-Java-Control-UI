@@ -1,40 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplication2.FXMLDocumentController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="RoverControlUI.FXMLDocumentController">
   <tabs>
     <Tab fx:id="graphTab" text="Graphs">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TitledPane animated="false" layoutX="28.0" layoutY="50.0" text="Left RPM">
+                  <TitledPane animated="false" layoutX="14.0" layoutY="49.0" prefHeight="75.0" prefWidth="100.0" text="Left RPM">
                      <content>
                         <AnchorPane fx:id="LRPMContainer" minHeight="0.0" minWidth="0.0" prefHeight="50.0" prefWidth="100.0">
                            <children>
-                              <Label fx:id="LRPMData" layoutX="16.0" layoutY="15.0" minHeight="16" minWidth="69" />
+                              <Label fx:id="LRPMData" layoutX="32.0" layoutY="11.0" text="Value" />
                            </children>
                         </AnchorPane>
                      </content>
                   </TitledPane>
-               </children></AnchorPane>
+                  <TitledPane animated="false" layoutX="160.0" layoutY="49.0" prefHeight="75.0" prefWidth="100.0" text="Right RPM">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="75.0" prefWidth="100.0">
+                           <children>
+                              <Label fx:id="RRPMData" layoutX="38.0" layoutY="11.0" text="Value" />
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </TitledPane>
+                  <TitledPane animated="false" layoutX="334.0" layoutY="49.0" prefHeight="75.0" prefWidth="100.0" text="GPS Lat">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="75.0" prefWidth="100.0">
+                           <children>
+                              <Label fx:id="GPSLat" layoutX="38.0" layoutY="11.0" text="Value" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </TitledPane>
+                  <TitledPane animated="false" layoutX="469.0" layoutY="49.0" prefHeight="75.0" prefWidth="100.0" text="GPS Long">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="75.0" prefWidth="100.0">
+                           <children>
+                              <Label fx:id="GPSLong" layoutX="38.0" layoutY="11.0" text="Value" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </TitledPane>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding></AnchorPane>
       </content>
     </Tab>
     <Tab fx:id="webTab" text="Web Page">
          <content>
-            <AnchorPane>
-               <children>
-                  <SubScene fx:id="webScene" height="359.0" layoutX="1.0" layoutY="1.0" width="599.0">
-                    <root>
-                      <Region />
-                    </root>
-                  </SubScene>
-               </children>
-            </AnchorPane>
+            <AnchorPane />
          </content>
     </Tab>
   </tabs>

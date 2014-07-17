@@ -4,11 +4,12 @@
  * and open the template in the editor.
  */
 
-package javafxapplication2;
+package RoverControlUI;
 
 import java.util.Timer;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.SubScene;
@@ -29,9 +30,13 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Label LRPMData;
     @FXML
-    private Tab webTab;
+    private Label RRPMData;
     @FXML
-    private SubScene webScene;
+    private Label GPSLat;
+    @FXML
+    private Label GPSLong;
+    @FXML
+    private Tab webTab;
     
 
     /**
@@ -39,7 +44,39 @@ public class FXMLDocumentController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        LRPMData.setText("9001");
-    }    
+         Task task = new Task<Void>() {
+            @Override public Void call() {
+                final int max = 1000000;
+                
+                while(true) {
+                    int i = 0;
+                    if (isCancelled()) {
+                       break;
+                    }
+                    i++;
+                    updateMessage(Integer.toString(i));
+                }
+                return null;
+                
+            }
+        };
+         
+        LRPMData.textProperty().bind(task.messageProperty());
+        RRPMData.setText("Right RPM");
+        GPSLat.setText("GPS L");
+        GPSLong.setText("GPS R");
+        
+        Thread t1 = new Thread(task);
+        t1.setDaemon(true);
+        t1.start();
+    }
+    
+    public Label getLabel() {
+        return LRPMData;
+    }
+    
+    public static void loop() {
+        
+    }
     
 }

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package javafxapplication2;
+package RoverControlUI;
 
 import javafx.application.Application;
 import javafx.geometry.HPos;

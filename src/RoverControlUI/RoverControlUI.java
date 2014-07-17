@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package javafxapplication2;
+package RoverControlUI;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +17,7 @@ import javafx.scene.paint.Color;
  *
  * @author Matt
  */
-public class JavaFXApplication2 extends Application {
+public class RoverControlUI extends Application {
     
     @Override
     public void start(Stage mainStage) throws Exception {
@@ -27,16 +27,15 @@ public class JavaFXApplication2 extends Application {
         Stage cameraStage3 = new Stage();
         
         Scene scene1 = new Scene(root);
-        Scene frontCamLeft = new Scene(new Browser("http://www.pacificspacecenter.com/"));
-        Scene frontCamRight = new Scene(new Browser("http://www.google.com"));
-        Scene rearCam = new Scene(new Browser("http://www.xkcd.com"));
+        Scene frontCamLeft = new Scene(new Browser("http://192.168.1.132/axis-cgi/mjpeg/video.cgi"));
+        Scene frontCamRight = new Scene(new Browser("http://192.168.1.120/axis-cgi/mjpeg/video.cgi"));
+        Scene rearCam = new Scene(new Browser("http://192.168.1.227"));
         
         
-        stageInit(cameraStage1, frontCamLeft, "Front Left Cam");
+        /*stageInit(cameraStage1, frontCamLeft, "Front Left Cam");
         stageInit(cameraStage2, frontCamRight, "Front Cam Right");
-        stageInit(cameraStage3, rearCam, "Rear Camera");
+        stageInit(cameraStage3, rearCam, "Rear Camera");*/
         stageInit(mainStage, scene1, "PISCES Rover");
-        
         
     }
 
