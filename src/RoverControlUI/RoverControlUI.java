@@ -21,7 +21,7 @@ public class RoverControlUI extends Application {
     
     @Override
     public void start(Stage mainStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("RCUI.fxml"));
         Stage cameraStage1 = new Stage();
         Stage cameraStage2 = new Stage();
         Stage cameraStage3 = new Stage();
@@ -51,7 +51,5 @@ public class RoverControlUI extends Application {
         stage.setScene(scene);
         stage.show();
     }
-    
-    FXMLDocumentController controller;
     
 }

@@ -17,10 +17,11 @@
             <file>file:/C:/Users/Matt/Documents/NetBeansProjects/JavaFXApplication2/src/javafxapplication2/FXMLDocumentController.java</file>
         </group>
         <group name="Rover Control Station">
+            <file>file:/C:/Users/Matt/Documents/NetBeansProjects/JavaFXApplication2/src/RoverControlUI/RCUIController.java</file>
+            <file>file:/C:/Users/Matt/Documents/NetBeansProjects/JavaFXApplication2/src/RoverControlUI/RCUI.fxml</file>
             <file>file:/C:/Users/Matt/Documents/NetBeansProjects/JavaFXApplication2/src/RoverControlUI/RoverControlUI.java</file>
             <file>file:/C:/Users/Matt/Documents/NetBeansProjects/JavaFXApplication2/src/RoverControlUI/ControlLoop.java</file>
             <file>file:/C:/Users/Matt/Documents/NetBeansProjects/JavaFXApplication2/src/RoverControlUI/Browser.java</file>
-            <file>file:/C:/Users/Matt/Documents/NetBeansProjects/JavaFXApplication2/src/RoverControlUI/FXMLDocument.fxml</file>
         </group>
     </open-files>
 </project-private>

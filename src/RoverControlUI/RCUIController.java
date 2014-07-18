@@ -6,55 +6,66 @@
 
 package RoverControlUI;
 
-import java.util.Timer;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.SubScene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 
 /**
  * FXML Controller class
  *
  * @author Matt
  */
-public class FXMLDocumentController implements Initializable {
+public class RCUIController implements Initializable {
     @FXML
-    public Tab graphTab;
+    private Tab graphTab;
     @FXML
-    public AnchorPane LRPMContainer;
+    private AnchorPane LRPMContainer;
     @FXML
-    public Label LRPMData;
+    private Label LRPMData;
     @FXML
-    public Label RRPMData;
+    private Label RRPMData;
     @FXML
-    public Label GPSLat;
+    private Label GPSLat;
     @FXML
-    public Label GPSLong;
+    private Label GPSLong;
     @FXML
-    public Tab webTab;
-    
+    private Tab webTab;
+    @FXML
+    private Color x4;
+    @FXML
+    private Font x3;
+    @FXML
+    private Circle joyStatusLight;
+    @FXML
+    private Label joyStatus;
 
     /**
      * Initializes the controller class.
      */
+    
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         ControlLoop task = new ControlLoop();
          
         LRPMData.textProperty().bind(task.LRPMValue);
         RRPMData.textProperty().bind(task.RRPMValue);
+        joyStatus.textProperty().bind(task.ControllerStatus);
+        joyStatusLight.fillProperty().bind(task.CircleColor);
         GPSLat.setText("GPS L");
         GPSLong.setText("GPS R");
         
         Thread t1 = new Thread(task);
         t1.setDaemon(true);
         t1.start();
-    }
-    
+    }    
     
 }

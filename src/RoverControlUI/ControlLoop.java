@@ -8,8 +8,14 @@ package RoverControlUI;
 import javafx.concurrent.Task;
 import java.util.Observable;
 import javafx.application.Platform;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.beans.property.StringProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import net.java.games.input.*;
+import net.java.games.input.Component.Identifier;
 
 /**
  *
@@ -19,25 +25,50 @@ public class ControlLoop extends Task {
 
     public StringProperty RRPMValue;
     public StringProperty LRPMValue;
+    public StringProperty ControllerStatus;
+    public ObjectProperty CircleColor;
+    
+    JoystickUpdater gamepad = new JoystickUpdater();
     
     ControlLoop() {
         RRPMValue = new SimpleStringProperty("");
         LRPMValue = new SimpleStringProperty("");
+        
+    //Do not touch-------------------------
+        gamepad.searchForControllers();
+    //-------------------------------------
+        
+        if(gamepad.isConnected()) {
+            CircleColor = new SimpleObjectProperty(Color.GREEN);
+            ControllerStatus = new SimpleStringProperty(gamepad.getName());
+        }
+        else {
+            CircleColor = new SimpleObjectProperty(Color.RED);
+            ControllerStatus = new SimpleStringProperty("No gamepad found");
+        }
+        
+        
     }
     
     @Override
     protected Void call() {
-        
-        int i = 0;
         while (true) {
             if (isCancelled()) {
                 break;
             }
-            i++;
-            updateString(LRPMValue, Integer.toString(i));
-            updateString(RRPMValue, Integer.toString(i));
+            updateString(LRPMValue, Integer.toString(gamepad.leftStickX));
+            updateString(RRPMValue, Integer.toString(gamepad.leftStickY));
+            
+            if(!gamepad.isConnected()) {
+                updateColor(CircleColor, Color.RED);
+                updateString(ControllerStatus, "Controller Disconnected!");
+            }
+            else {
+                gamepad.updateController();   
+            }
+                
             try {
-                Thread.sleep(300);
+                Thread.sleep(100);
             } catch (InterruptedException ex) {
                 System.exit(0);
             }
@@ -49,6 +80,14 @@ public class ControlLoop extends Task {
         Platform.runLater(new Runnable() {
             @Override public void run() {
                 string.setValue(value);
+            }
+        });
+    }
+    
+    public void updateColor(ObjectProperty shape, Color newColor) {
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                shape.setValue(newColor);
             }
         });
     }
