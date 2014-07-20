@@ -21,10 +21,10 @@ public class JoystickUpdater {
     Component[] componentList;
     
     
-    public int leftStickX;
-    public int leftStickY;
-    public int rightStickX;
-    public int rightStickY;
+    public static int leftStickX;
+    public static int leftStickY;
+    public static int rightStickX;
+    public static int rightStickY;
     
     public void searchForControllers() { //Needs to be optimized to not consume crazy CPU when controller == D/C
         try {
@@ -87,7 +87,7 @@ public class JoystickUpdater {
     }
     
      public int scaleAxisValue(float axisValue) {
-        return (int)(axisValue*127);
+        return (int)(axisValue*3000);
     }
      
      private static ControllerEnvironment createDefaultEnvironment() throws ReflectiveOperationException {

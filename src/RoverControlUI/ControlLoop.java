@@ -75,6 +75,8 @@ public class ControlLoop extends Task {
                 gamepad.updateController();   
                 updateString(leftStickYData, Integer.toString(gamepad.leftStickY));
                 updateString(rightStickYData, Integer.toString(gamepad.rightStickY));
+                updateString(LRPMValue, udpSocket.leftRPM);
+                updateString(RRPMValue, udpSocket.rightRPM);
                 updateColor(CircleColor, Color.LIME);
                 updateString(ControllerStatus, gamepad.getName());
             }

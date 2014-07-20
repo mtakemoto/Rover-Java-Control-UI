@@ -17,14 +17,17 @@ import java.io.*;
 public class RoverUDP extends Thread {
     
     private DatagramSocket datagramSocket;
-    private int leftRPM;
-    private String localAddress;
+    public String leftRPM;
+    public String rightRPM;
+    public String localAddress;
     private String localPort;
+    private InetAddress remoteAddr;
     
     public RoverUDP(int port) {
         try{
             datagramSocket = new DatagramSocket(port);
             System.out.println("Socket initialized on port  " + Integer.toString(port) + " :D");
+            remoteAddr = InetAddress.getByName("192.168.240.1");
         } catch(IOException ex) {
             System.out.println("Unable to initialize socket on UDP port " + Integer.toString(port));
         }
@@ -42,30 +45,37 @@ public class RoverUDP extends Thread {
             try {
                 datagramSocket.receive(rxPacket);
                 buffer = rxPacket.getData();
+                System.out.println(buffer.toString());
+                convertRPM(buffer);
+                System.out.println("Left: " + leftRPM + " Right: " + rightRPM);
                 //Test Code----------
-                String sentence = new String(buffer, 0, buffer.length);
-                System.out.println("Recieved: " + sentence);
                 //Send data
-                InetAddress IPAddress = rxPacket.getAddress();
-                String sendString = "Hi Desktop! --Laptop";
-                byte[] sendData = sendString.getBytes("UTF-8");
-                DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, rxPacket.getPort());
+                DatagramPacket sendPacket = packJoystickData();
                 datagramSocket.send(sendPacket);
             } catch (IOException ex) {
                 System.err.print(ex);
             }
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException ex) {
+                System.exit(0);
+            }
         }
     }
     
-    private String shiftPacket(byte[] data) {
-        return Integer.toString(data[0] + data[1] << 8);
+    private void convertRPM(byte[] data) {
+        leftRPM = Integer.toString(data[0] + (data[1] << 8));
+        rightRPM = Integer.toString(data[2] + (data[3] << 8));
     }
     
     public void closeSocket() {
         datagramSocket.close();
     }
     
-    public String test() {
-        return "Cake!";
+    public DatagramPacket packJoystickData() throws IOException{
+        String sendString = JoystickUpdater.leftStickY + ":" + JoystickUpdater.rightStickY;
+        //String sendString = "100:100";
+        byte[] sendData = sendString.getBytes();
+        return new DatagramPacket(sendData, sendData.length, remoteAddr, 30001);
     }
 }
