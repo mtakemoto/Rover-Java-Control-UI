@@ -13,16 +13,26 @@ package RoverControlUI;
 
 import net.java.games.input.*;
 import net.java.games.input.Component.Identifier;
+import java.lang.reflect.*;
 
 public class JoystickUpdater {
-    Component[] componentList;
+    Controller[] controllerList;
     Controller controller = null;
+    Component[] componentList;
     
-    public int leftStickX = 0;
-    public int leftStickY = 0;
     
-    public void searchForControllers() {
-        Controller[] controllerList = ControllerEnvironment.getDefaultEnvironment().getControllers();
+    public int leftStickX;
+    public int leftStickY;
+    public int rightStickX;
+    public int rightStickY;
+    
+    public void searchForControllers() { //Needs to be optimized to not consume crazy CPU when controller == D/C
+        try {
+            ControllerEnvironment ce = createDefaultEnvironment();
+            controllerList = ce.getControllers();
+        } catch (ReflectiveOperationException ex) {
+            System.err.print(ex);
+        }
         
         for (int i = 0; i < controllerList.length; i++) {
             if (controllerList[i].getType() == Controller.Type.GAMEPAD) {
@@ -49,9 +59,15 @@ public class JoystickUpdater {
                     continue;
                 }
                 // Y Axis
-                if(componentId == Component.Identifier.Axis.Y){
+                else if(componentId == Component.Identifier.Axis.Y){
                     leftStickY = scaleAxisValue(component.getPollData()); 
                     continue;
+                }
+                else if(componentId == Component.Identifier.Axis.RX) {
+                    rightStickX = scaleAxisValue(component.getPollData());
+                }
+                else if(componentId == Component.Identifier.Axis.RY) {
+                    rightStickY = scaleAxisValue(component.getPollData());
                 }
             }
         }     
@@ -72,5 +88,17 @@ public class JoystickUpdater {
     
      public int scaleAxisValue(float axisValue) {
         return (int)(axisValue*127);
+    }
+     
+     private static ControllerEnvironment createDefaultEnvironment() throws ReflectiveOperationException {
+        // Find constructor (class is package private, so we can't access it directly)
+        Constructor<ControllerEnvironment> constructor = (Constructor<ControllerEnvironment>)
+        Class.forName("net.java.games.input.DefaultControllerEnvironment").getDeclaredConstructors()[0];
+
+        // Constructor is package private, so we have to deactivate access control checks
+        constructor.setAccessible(true);
+
+        // Create object with default constructor
+        return constructor.newInstance();
     }
 }

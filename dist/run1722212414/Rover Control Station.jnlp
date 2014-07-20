@@ -11,8 +11,8 @@
   </resources>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Rover_Control_Station.jar" size="13673" download="eager" />
-    <jar href="lib/jinput.jar" size="233853" download="eager" />
+    <jar href="Rover_Control_Station.jar" size="18372" download="eager" />
+    <jar href="lib/jinput.jar" size="233851" download="eager" />
   </resources>
 <security>
   <all-permissions/>
