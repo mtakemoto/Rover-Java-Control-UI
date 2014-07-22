@@ -10,13 +10,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
+import javafx.scene.control.*;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import javafx.scene.control.TextArea;
+
 
 /**
  * FXML Controller class
@@ -24,28 +22,21 @@ import javafx.scene.control.TextArea;
  * @author Matt
  */
 public class RCUIController implements Initializable {
-    @FXML
-    private Label leftRPMLabel;
-    @FXML
-    private Label rightRPMLabel;
-    @FXML
-    private Label gpsLatLabel;
-    @FXML
-    private Label gpsLongLabel;
-    @FXML
-    private Color x4;
-    @FXML
-    private Font x3;
-    @FXML
-    private Circle joyStatusLight;
-    @FXML
-    private Label joyStatusLabel;
-    @FXML
-    private Label leftYAxisLabel;
-    @FXML
-    private Label rightYAxisLabel;
-    @FXML
-    private TextArea textArea;
+    @FXML private Label leftRPMLabel;
+    @FXML private Label rightRPMLabel;
+    @FXML private Label gpsLatLabel;
+    @FXML private Label gpsLongLabel;
+    @FXML private Font x3;
+    @FXML private Circle joyStatusLight;
+    @FXML private Label joyStatusLabel;
+    @FXML private Label leftYAxisLabel;
+    @FXML private Label rightYAxisLabel;
+    @FXML private TextArea consoleOutput;
+    @FXML private TextField commandInput;
+    @FXML private TextArea commandOutput;
+    @FXML private Label commStatusLabel;
+    @FXML private Rectangle txLight;
+    @FXML private Rectangle rxLight;
 
     /**
      * Initializes the controller class.
@@ -61,7 +52,6 @@ public class RCUIController implements Initializable {
         joyStatusLight.fillProperty().bind(task.CircleColor);
         leftYAxisLabel.textProperty().bind(task.leftStickYData);
         rightYAxisLabel.textProperty().bind(task.rightStickYData);
-        //textArea.textProperty().bind();
         gpsLatLabel.setText("GPS L");
         gpsLongLabel.setText("GPS R");
         

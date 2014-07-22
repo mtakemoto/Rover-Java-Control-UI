@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.shape.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -9,7 +10,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="641.0" prefWidth="965.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="RoverControlUI.RCUIController">
+<VBox prefHeight="706.0" prefWidth="965.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="RoverControlUI.RCUIController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -50,9 +51,9 @@
         </Menu>
       </menus>
     </MenuBar>
-      <SplitPane dividerPositions="0.8" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" orientation="VERTICAL" prefHeight="594.0" prefWidth="965.0">
+      <SplitPane dividerPositions="0.7630769230769231" orientation="VERTICAL" prefHeight="697.0" prefWidth="965.0" VBox.vgrow="ALWAYS">
          <items>
-            <Pane prefHeight="197.0" prefWidth="898.0">
+            <Pane prefHeight="528.0" prefWidth="963.0">
                <children>
                   <TitledPane animated="false" layoutX="14.0" layoutY="14.0" prefHeight="130.0" prefWidth="220.0" text="RPM Data">
                     <content>
@@ -67,22 +68,22 @@
                         </AnchorPane>
                     </content>
                   </TitledPane>
-                  <TitledPane animated="false" layoutX="14.0" layoutY="193.0" text="Controller Info">
+                  <TitledPane animated="false" layoutX="14.0" layoutY="173.0" text="Controller Info">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="250.0">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="156.0" prefWidth="250.0">
                            <children>
                               <Label layoutX="14.0" layoutY="14.0" text="Left Y:" AnchorPane.leftAnchor="10.0" />
-                              <Separator layoutX="40.0" layoutY="58.0" prefHeight="3.0" prefWidth="250.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0" />
-                              <Label layoutX="14.0" layoutY="65.0" text="Right Y:" AnchorPane.leftAnchor="10.0" />
+                              <Separator layoutX="40.0" layoutY="58.0" prefHeight="3.0" prefWidth="250.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
+                              <Label layoutX="14.0" layoutY="65.0" text="Right Y:" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="40.0" />
                               <Label fx:id="leftYAxisLabel" layoutX="87.0" layoutY="14.0" text="leftYAxisLabel" />
-                              <Label fx:id="rightYAxisLabel" layoutX="87.0" layoutY="65.0" text="rightYAxisLabel" />
+                              <Label fx:id="rightYAxisLabel" layoutX="87.0" layoutY="65.0" text="rightYAxisLabel" AnchorPane.topAnchor="40.0" />
                            </children>
                         </AnchorPane>
                      </content>
                   </TitledPane>
-                  <TitledPane animated="false" layoutX="300.0" layoutY="14.0" prefHeight="312.0" prefWidth="202.0" text="GPS">
+                  <TitledPane animated="false" layoutX="300.0" layoutY="14.0" prefHeight="159.0" prefWidth="224.0" text="Sensors">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="280.0" prefWidth="222.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="118.0" prefWidth="222.0">
                            <children>
                               <Label layoutX="18.0" layoutY="14.0" text="Latitude:" />
                               <Separator layoutX="60.0" layoutY="47.0" prefHeight="3.0" prefWidth="222.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
@@ -90,44 +91,80 @@
                               <Label fx:id="gpsLongLabel" layoutX="104.0" layoutY="51.0" text="gpsLongLabel" />
                               <Label layoutX="18.0" layoutY="51.0" text="Longitude:" />
                               <Separator layoutX="14.0" layoutY="79.0" prefHeight="3.0" prefWidth="222.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                              <Label fx:id="tempLabel" layoutX="106.0" layoutY="88.0" text="tempLabel" />
+                              <Label layoutX="18.0" layoutY="88.0" text="Temp (°F):" />
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </TitledPane>
+                  <TitledPane animated="false" layoutX="553.0" layoutY="14.0" prefHeight="438.0" prefWidth="252.0" text="Queue Commands">
+                     <content>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <TextArea fx:id="commandOutput" editable="false" layoutX="25.0" layoutY="64.0" prefHeight="200.0" prefWidth="200.0" promptText="Sent commands are displayed here for confirmation" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="-13.0" AnchorPane.rightAnchor="-13.0" AnchorPane.topAnchor="-15.0" />
+                              <TextField fx:id="commandInput" layoutX="32.0" layoutY="388.0" promptText="Enter your command" AnchorPane.bottomAnchor="-7.0" AnchorPane.leftAnchor="-5.0" AnchorPane.rightAnchor="-5.0" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </TitledPane>
+                  <ImageView fitHeight="74.0" fitWidth="300.0" layoutX="14.0" layoutY="378.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../Desktop/logo-wide.png" />
+                     </image>
+                  </ImageView>
+                  <TitledPane animated="false" layoutX="300.0" layoutY="193.0" prefHeight="259.0" prefWidth="224.0" text="Rover Status">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ToggleButton layoutX="97.0" layoutY="14.0" mnemonicParsing="false" text="ToggleButton" />
                            </children>
                         </AnchorPane>
                     </content>
                   </TitledPane>
                </children>
             </Pane>
-            <Accordion prefHeight="247.0" prefWidth="898.0">
-              <panes>
-                <TitledPane animated="false" text="Console Messages">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="155.0" prefWidth="963.0">
-                           <children>
-                              <TextArea fx:id="textArea" layoutX="382.0" layoutY="-74.0" prefHeight="51.0" prefWidth="963.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                           </children></AnchorPane>
-                  </content>
-                </TitledPane>
-              </panes>
-            </Accordion>
+          <TitledPane animated="false" collapsible="false" prefHeight="150.0" prefWidth="963.0" text="Console Messages">
+               <content>
+                  <TextArea fx:id="consoleOutput" editable="false" prefHeight="75.0" prefWidth="961.0" style="-fx-text-fill: green;" text="Create a new instance of the default skin for this control. This is called to create a skin for the control if no skin is provided via CSS -fx-skin or set explicitly in a sub-class with setSkin(...).Overrides:createDefaultSkin in class ControlReturns:" wrapText="true">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </TextArea>
+               </content>
+          </TitledPane>
          </items>
       </SplitPane>
-    <HBox id="HBox" alignment="CENTER_LEFT" maxHeight="-Infinity" prefHeight="4.0" prefWidth="965.0" spacing="5.0" VBox.vgrow="NEVER">
-      <children>
-            <AnchorPane maxHeight="-Infinity" prefHeight="5.0" prefWidth="959.0" HBox.hgrow="ALWAYS">
-               <children>
-              <Label fx:id="joyStatusLabel" layoutX="23.0" maxHeight="1.7976931348623157E308" maxWidth="-1.0" prefHeight="1.0" prefWidth="341.0" text="joyStatusLabel" textFill="#545454" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="23.0">
-                <font>
-                  <Font size="11.0" fx:id="x3" />
-                </font>
-              </Label>
-              <Pane />
-              <Label font="$x3" maxWidth="-1.0" text="Right status" textFill="$x4" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                  <Circle fx:id="joyStatusLight" fill="#3fff1f" layoutX="11.0" layoutY="8.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
-               </children>
-            </AnchorPane>
-      </children>
+    <HBox id="HBox" alignment="CENTER_LEFT" maxHeight="-Infinity" prefHeight="0.0" prefWidth="965.0" spacing="5.0" VBox.vgrow="NEVER">
       <padding>
         <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
       </padding>
     </HBox>
+      <AnchorPane maxHeight="-Infinity" prefHeight="5.0" prefWidth="959.0">
+         <children>
+            <Rectangle fx:id="txLight" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="10.0" layoutX="910.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" width="10.0" AnchorPane.bottomAnchor="3.0" />
+        <Label fx:id="joyStatusLabel" layoutX="23.0" maxHeight="1.7976931348623157E308" maxWidth="-1.0" prefHeight="1.0" prefWidth="341.0" text="joyStatusLabel" textFill="#545454" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="23.0">
+          <font>
+            <Font size="11.0" fx:id="x3" />
+          </font>
+        </Label>
+            <Circle fx:id="joyStatusLight" fill="#3fff1f" layoutX="11.0" layoutY="8.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="6.0" />
+            <Label fx:id="commStatusLabel" layoutX="770.0" layoutY="-2.0" text="commStatusLabel">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label layoutX="893.0" layoutY="-2.0" text="TX">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Rectangle fx:id="rxLight" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="10.0" layoutX="947.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" width="10.0" />
+            <Label layoutX="928.0" layoutY="-2.0" text="RX">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
   </children>
 </VBox>

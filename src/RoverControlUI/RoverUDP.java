@@ -23,11 +23,11 @@ public class RoverUDP extends Thread {
     private String localPort;
     private InetAddress remoteAddr;
     
-    public RoverUDP(int port) {
+    public RoverUDP(int port, String ipAddress) {
         try{
             datagramSocket = new DatagramSocket(port);
             System.out.println("Socket initialized on port  " + Integer.toString(port) + " :D");
-            remoteAddr = InetAddress.getByName("192.168.240.1");
+            remoteAddr = InetAddress.getByName(ipAddress);
         } catch(IOException ex) {
             System.out.println("Unable to initialize socket on UDP port " + Integer.toString(port));
         }
@@ -43,13 +43,12 @@ public class RoverUDP extends Thread {
         
         while(true) {
             try {
+                //--Recieve data--
                 datagramSocket.receive(rxPacket);
                 buffer = rxPacket.getData();
-                System.out.println(buffer.toString());
                 convertRPM(buffer);
                 System.out.println("Left: " + leftRPM + " Right: " + rightRPM);
-                //Test Code----------
-                //Send data
+                //--Send data--
                 DatagramPacket sendPacket = packJoystickData();
                 datagramSocket.send(sendPacket);
             } catch (IOException ex) {
